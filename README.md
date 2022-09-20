@@ -11,8 +11,12 @@ The purpose of this project is to utilize websocket protocol and provide real-ti
 - TypeScript
 - Nodemon / ts-node
 - [ws - npm](https://www.npmjs.com/package/ws)
+- [winston - npm](https://www.npmjs.com/package/winston)
+- [applicationinsights - npm](https://www.npmjs.com/package/applicationinsights)
 
 ### Running the project
+
+Add a .env file to root of api project and add environment variable for Azure Application Insights.
 
 ```shell
 cd src/api

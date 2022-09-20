@@ -1,14 +1,22 @@
-import { Server } from 'ws';
+import { Server, type WebSocket } from 'ws';
+import { Config } from './utils/config';
+import { logger } from './utils/logger';
 
-const wss = new Server({ host: '127.0.0.1', port: 8080 });
+Config.setup();
 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function message(data) {
-    console.log('received: %s', data);
+const wss = new Server({ port: 8080 });
+
+wss
+  .on('connection', (ws: WebSocket) => {
+    logger.info(`We are connected ${new Date().toISOString()}`);
+
+    ws.on('message', (data) => {});
+
+    ws.send('We are live');
+  })
+  .on('error', (error: Error) => {
+    logger.error(`WSS Error: ${error.message}`);
   });
-
-  ws.send('We are live');
-});
 
 setInterval(() => {
   wss.clients.forEach((client) => {
